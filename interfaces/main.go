@@ -40,72 +40,26 @@ func NewAnimal(name, a_type string) Animal {
 	}
 }
 
-var CowData = map[string]string{
-	"eat": "grass",
-	"move": "walk",
-	"speak": "moo",
-}
-
-var BirdData = map[string]string{
-	"eat": "worms",
-	"move": "fly",
-	"speak": "peep",
-}
-
-var SnakeData = map[string]string{
-	"eat": "mice",
-	"move": "slither",
-	"speak": "hsss",
-}
-
-func FindFood(a Animal, request string) string	{
-	switch a.(type)	{
-	case *Cow:
-		val, ok := CowData[request]
-		if ok {
-			return val
-		} else {
-			return "Info not found!"
-		}
-	case *Bird:
-		val, ok := BirdData[request]
-		if ok {
-			return val
-		} else {
-			return "Info not found!"
-		}
-	case *Snake:
-		val, ok := SnakeData[request]
-		if ok {
-			return val
-		} else {
-			return "Info not found!"
-		}
-	default:
-		return "Animal can only be cow bird, or snake!"
-	}
-}
-
 func (c *Cow) Eat()	{
 	if c == nil {
 		fmt.Println("No cow exists")
 		return
 	}
-	fmt.Printf("Cow eats grass\n")
+	fmt.Printf("grass\n")
 }
 
 func (c *Cow) Move()	{
 	if c == nil {
 		fmt.Println("No cow exists")
 	}
-	fmt.Printf("Cow walks\n")
+	fmt.Printf("walk\n")
 }
 
 func (c *Cow) Speak()	{
 	if c == nil {
 		fmt.Println("No cow exists")
 	}
-	fmt.Printf("Cow makes moo sound\n")
+	fmt.Printf("moo\n")
 }
 
 func (c *Cow) GetName() string {
@@ -120,21 +74,21 @@ func (b *Bird) Eat()	{
 		fmt.Println("No bird exists")
 		return
 	}
-	fmt.Printf("Bird eats worms\n")
+	fmt.Printf("worms\n")
 }
 
 func (b *Bird) Move()	{
 	if b == nil {
 		fmt.Println("No bird exists")
 	}
-	fmt.Printf("Bird flies\n")
+	fmt.Printf("fly\n")
 }
 
 func (b *Bird) Speak()	{
 	if b == nil {
 		fmt.Println("No bird exists")
 	}
-	fmt.Printf("Bird makes peep sound\n")
+	fmt.Printf("peep\n")
 }
 
 
@@ -150,21 +104,21 @@ func (s *Snake) Eat()	{
 		fmt.Println("No snake exists")
 		return
 	}
-	fmt.Printf("Snake eats mice\n")
+	fmt.Printf("mice\n")
 }
 
 func (s *Snake) Move()	{
 	if s == nil {
 		fmt.Println("No snake exists")
 	}
-	fmt.Printf("Snake slithers\n")
+	fmt.Printf("slithers\n")
 }
 
 func (s *Snake) Speak()	{
 	if s == nil {
 		fmt.Println("No snake exists")
 	}
-	fmt.Printf("Snake makes hsss sound\n")
+	fmt.Printf("hsss\n")
 }
 
 func (s *Snake) GetName() string {
@@ -198,7 +152,7 @@ func main()	{
 			}
 			// create a new animal and add to the list
 			animals = append(animals, NewAnimal(request[1], request[2]))
-			
+			fmt.Println("Created it!")
 		case "query":
 			if len(request) < 3 {
 				fmt.Println("The format is 'query <name> <info>")
@@ -208,7 +162,14 @@ func main()	{
 			for _, a := range animals {
 				name := a.GetName()
 				if name == request[1]	{
-					fmt.Println(FindFood(a, request[2]))
+					switch request[2]	{
+					case "eat":
+						a.Eat()
+					case "move":
+						a.Move()
+					case "speak":
+						a.Speak()
+					}
 					found = true
 				}
 			}
