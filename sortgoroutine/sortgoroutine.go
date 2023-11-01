@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"slices"
+	"sort"
 	"strconv"
 	"strings"
 	"sync"
@@ -66,8 +66,8 @@ func Divide(arr *[]int) *[3]int	{
 
 // Sorts the given array
 func SortArray(arr []int, wg *sync.WaitGroup) {
-	slices.Sort(arr)
-	fmt.Printf("Sorted subarray %v\n", arr)
+	fmt.Printf("Sorting subarray %v\n", arr)
+	sort.Ints(arr)
 	wg.Done()
 }
 
